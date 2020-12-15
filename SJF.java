@@ -30,6 +30,8 @@ class SJF{
     public SJF(){};
  
     void displayTable(){
+        System.out.println();
+        System.out.println("SJF");
         System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");
         System.out.println("--------------------------------------------------");
         for(int i = 0; i<process;i++){
@@ -38,26 +40,30 @@ class SJF{
         System.out.println("--------------------------------------------------");
         }	
 
-        System.out.println("Average Turn-around Time:\t\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
-        System.out.println("Average Waiting Time:\t\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+        System.out.println("Average Turn-around Time:\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
+        System.out.println("Average Waiting Time:\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+        System.out.println();
     }
 
     
     void getShortestJob(){
-        for(int i = 0; i < process*2;i++){
+        int completed = 0;
+        for(int i = 0; i < process;i=completed){
             getReadyQueue();
             sortBurstTime();
-            if(readyQueue[0]==999
-            ){
+            if(readyQueue[0]==999){
                 time++;
             }
             else{
                 computeCompletionTime();
+                completed++;
             }
         }
+        displayTable();
     }
 
-  
+    
+
     void getReadyQueue(){
         readyQueue= new int [process];
         for(int i = 0; i<process;i++){
@@ -80,13 +86,12 @@ class SJF{
             }
         }
     }
-        
+
     void sortBurstTime(){
 
         for(int i = 0; i<process-1; i++){
             for(int j=0; j<process-i-1;j++){
-                    if(!(readyQueue[j+1]==999
-                    )){
+                    if(!(readyQueue[j+1]==999)){
                         if(temp[readyQueue[j]]>temp[readyQueue[j+1]]){
                             int tmp = readyQueue[j];
                             readyQueue[j] = readyQueue[j+1];

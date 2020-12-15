@@ -30,6 +30,9 @@ class Priority{
 
 
     void displayTable(){
+        System.out.println();
+        System.out.println("PRIORITY");
+
         System.out.println("PID\tAT\tBT\tP\tCT\tTAT\tWT");
         System.out.println("--------------------------------------------------");
         for(int i = 0; i<process;i++){
@@ -38,13 +41,15 @@ class Priority{
         System.out.println("--------------------------------------------------");
         }	
 
-        System.out.println("Average Turn-around Time:\t\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
-        System.out.println("Average Waiting Time:\t\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+        System.out.println("Average Turn-around Time:\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
+        System.out.println("Average Waiting Time:\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+        System.out.println();
     }
 
     
      void getPriority(){
-        for(int i = 0; i < process*2;i++){
+         int completed=0;;
+        for(int i = 0; i < process;i=completed){
             getReadyQueue();
             sortPriority();
             if(readyQueue[0]==999){
@@ -52,8 +57,10 @@ class Priority{
             }
             else{
                 computeCompletionTime();
+                completed++;
             }
         }
+        displayTable();
     }
 
 
@@ -80,8 +87,6 @@ class Priority{
     }
         
      void sortPriority(){
-
-
         for(int i = 0; i<process-1; i++){
             for(int j=0; j<process-i-1;j++){
                     if(!(readyQueue[j+1]==999)){
@@ -93,11 +98,6 @@ class Priority{
                     }
                 }
         }
-        System.out.println("Time" + time);
-        for(int rq: readyQueue){
-            System.out.print(rq + " \t");
-        }
-        System.out.println();
     }
     
 

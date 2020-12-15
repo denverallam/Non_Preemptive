@@ -109,9 +109,12 @@ class FCFS{
 					waitingTime[i+1] = turnAroundTime[i+1] - burstTime[i+1];
 			}
 			sortPriorityId();
+			displayTable();
 		}
 
 		void displayTable(){
+			System.out.println();
+			System.out.println("FCFS");
 			System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");
 			System.out.println("--------------------------------------------------");
 			for(int i = 0; i<process;i++){
@@ -119,8 +122,9 @@ class FCFS{
 			+ "\t" + turnAroundTime[i] + "\t" + waitingTime[i]);
 			System.out.println("--------------------------------------------------");
 			}	
-			System.out.println("Average Turn-around Time:\t\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
-			System.out.println("Average Waiting Time:\t\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+			System.out.println("Average Turn-around Time:\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
+			System.out.println("Average Waiting Time:\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
+			System.out.println();
 		}
 
 		double computeAverage(int array[]){
