@@ -107,7 +107,6 @@ public class Main {
                 EDF edf = new EDF(processId, startingTime, burstTime, deadline, period, completionTime, turnAroundTime,waitingTime, temp,tempPeriod, count,
                     array, readyQueue,time,process,sum, lcm);
                 edf.getRunningProcess(); //execute Deadline algorithm 
-                System.out.println(process);
                 break;
             case "E": //if answer = e or E, create an object of MLQ class
                 System.out.println("MLQ"); //display Queue Choices
