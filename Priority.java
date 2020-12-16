@@ -9,9 +9,9 @@ class Priority{
     int [] prio;
     int [] readyQueue;
     int [] temp;
-    int time = 0;
-    int process = 0;
-    double sum = 0;
+    int time;
+    int process;
+    double sum;
 
    public Priority(int pid[], int at[],int bt[],int temp[],int[] pr, int ct[], int tat[],int wt[],int rq[],int p, int t,double s){
            this.processId = pid;
@@ -47,8 +47,8 @@ class Priority{
     }
 
     
-     void getPriority(){
-         int completed=0;;
+     void getPrio(){
+        int completed=0;;
         for(int i = 0; i < process;i=completed){
             getReadyQueue();
             sortPriority();

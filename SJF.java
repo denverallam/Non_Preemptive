@@ -9,9 +9,9 @@ class SJF{
      int [] waitingTime;
      int [] readyQueue;
      int [] temp;
-     int time = 0;
-     int process = 0;
-     double sum = 0;
+     int time;
+     int process;
+     double sum;
 
     public SJF(int pid[], int at[],int bt[],int temp[],int ct[], int tat[],int wt[],int rq[],int p, int t,double s){
             this.processId = pid;

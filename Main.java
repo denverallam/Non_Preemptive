@@ -1,5 +1,4 @@
-import java.io.IOException;
-import java.util.InputMismatchException;
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,9 +10,15 @@ public class Main {
     static int[] waitingTime;
     static int[] priority;
     static int[] deadline;
+    static int[] period;
+    static int[] flags;
+    static int[] queuePriority;
+    static int[] tempPeriod;
+    static int[] array;
+    static int[] startingTime;
     static int[] readyQueue;
     static int[] runningQueue;
-    static int[] completed;
+    static int[] count;
     static int[] temp;
     static int time = 0;
     static int process = 0;
@@ -21,7 +26,9 @@ public class Main {
     static String answer, algorithm = "";
     static double sum = 0;
     static int output = 0;
-    static int totalCT = 0;
+    static int lcm = 1;
+    static int startTime = 0;
+    static int check = 0;
 
     public static void main(final String args[]) {
         answer = "Y";
@@ -41,7 +48,7 @@ public class Main {
         System.out.println("CPU Scheduling Algorithm:");
         System.out.println("[A] First Come First Serve (FCFS)");
         System.out.println("[B] Shortest Job First (SJF)");
-        System.out.println("[C] Priority (Prio");
+        System.out.println("[C] Priority (Prio)");
         System.out.println("[D] Deadline");
         System.out.println("[E] Multilevel Queue (MLQ)");
         System.out.println("[F] Exit");
@@ -75,17 +82,24 @@ public class Main {
                 getPriority();
                 Priority prio = new Priority(processId, arrivalTime, burstTime, temp, priority, completionTime,
                         turnAroundTime, waitingTime, readyQueue, process, time, sum);
-                prio.getPriority();
+                prio.getPrio();
                 break;
             case "D":
                 getDeadline();
-                getOutputNumber();
-                EDF edf = new EDF(processId, burstTime, deadline, completionTime, turnAroundTime, waitingTime,
-                        readyQueue, process, output, sum, totalCT);
-                edf.getEarliestDeadline();
+                getPeriod();
+                EDF edf = new EDF(processId, startingTime, burstTime, deadline, period, completionTime, turnAroundTime,waitingTime, temp,tempPeriod, count,
+                    array, readyQueue,time,process,sum, lcm);
+                edf.getEDF();
+                System.out.println(process);
                 break;
             case "E":
                 System.out.println("MLQ");
+                System.out.println("Input Number of Queues:");
+                System.out.println("[1] First Come First Serve (FCFS)");
+                System.out.println("[2] Shortest Job First (SJF)");
+                getProcessQueue();
+                MLQ mlq = new MLQ(processId, arrivalTime, burstTime, completionTime, turnAroundTime, waitingTime, flags, queuePriority, startTime ,check, process);
+                mlq.execute();
                 break;
             case "F":
                 System.out.println("Exit");
@@ -111,6 +125,7 @@ public class Main {
         System.out.println();
     }
 
+
     static void getNumberOfProcess(){
         System.out.print("Input number of processes [2-9]: ");
         boolean done = true;
@@ -128,12 +143,19 @@ public class Main {
                 continue;
             }
         }
-  
+     
         processId= new int [process];
         arrivalTime= new int [process];
         burstTime= new int [process];
         deadline = new int [process];
         priority = new int [process];
+        count= new int [process];
+        period = new int [process];
+        array = new int [process];
+        flags = new int [process];
+        tempPeriod = new int [process];
+        queuePriority = new int [process];
+        startingTime = new int [process];
         completionTime= new int [process];
         readyQueue = new int[process];
         turnAroundTime= new int [process];
@@ -142,7 +164,6 @@ public class Main {
 
         System.out.println();
     }
-
     static void getArrivalTime(){
 
         boolean done = true;
@@ -162,7 +183,6 @@ public class Main {
                 }
             done = false;
             }
-            processId[i] = i;
         } 
         System.out.println();
 
@@ -185,10 +205,10 @@ public class Main {
                 }
             done = false;
             }
+            processId[i] = i;
         } 
         temp = burstTime.clone();
         System.out.println();
-
     }
     static void getDeadline(){
         System.out.println();
@@ -200,6 +220,7 @@ public class Main {
             while (done) {
                 if (scan.hasNextInt()){
                     deadline[i] = scan.nextInt();
+                    startingTime[i] = 0;
                 }
                 else {
                     System.out.print("ENTER VALID INPUT FOR Deadline " + (i+1) + ": ");
@@ -209,28 +230,34 @@ public class Main {
             done = false;
             }
         }
-        readyQueue =processId.clone();
+        temp = deadline.clone();
         System.out.println();
-
     }
-    static void getOutputNumber(){
+
+    static void getPeriod(){
+        System.out.println();
+        System.out.println("Input period for each process:");
         boolean done = true;
-        System.out.print("Enter number of output [MAX OF 3]:");
-        while (done) {
-            if (scan.hasNextInt()){
-                output = scan.nextInt();
-                if(output>3){
-                    getOutputNumber();
+        for(int i = 0; i < process; i++){
+            done = true;
+            System.out.print("Period " + (i+1) + ": ");
+            while (done) {
+                if (scan.hasNextInt()){
+                    period[i] = scan.nextInt();
                 }
-                done = false;
-            }
-            else {
-                System.out.print("ENTER VALID NUMBER [MAX OF 3]: ");
-                scan.next();
-                continue;
+                else {
+                    System.out.print("ENTER VALID INPUT FOR Period " + (i+1) + ": ");
+                    scan.next();
+                    continue;
+                }
+            done = false;
             }
         }
+        array = period.clone();
+        tempPeriod = period.clone();
+        System.out.println();
     }
+
     static void getPriority(){
         System.out.println();
         System.out.println("Input individual priority number:");
@@ -248,6 +275,31 @@ public class Main {
                     continue;
                 }
             done = false;
+            }
+        } 
+        System.out.println();
+    }
+
+
+    static void getProcessQueue(){
+        //user input to assign the queue number for each processes
+        for(int i = 0; i < process; i++){
+            boolean done = true;
+            System.out.print("Enter Process " + (i + 1) + " Queue: ");
+            while (done) {
+                if (scan.hasNextInt()){
+                    queuePriority[i] = scan.nextInt();
+                    if(queuePriority[i]<1 || queuePriority[i]>2){
+                        System.out.println("1 or 2 only!");
+                        getProcessQueue();
+                    }
+                }
+                else {
+                    System.out.print("ENTER VALID INPUT FOR Process Queue" + (i+1) + ": ");
+                    scan.next();
+                    continue;
+                }
+                done = false;
             }
         } 
         System.out.println();
