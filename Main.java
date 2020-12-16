@@ -86,27 +86,27 @@ public class Main {
             case "A": //if answer = a or A, create an object of FCFS class
                 FCFS fcfs = new FCFS(processId, arrivalTime, burstTime, temp, completionTime, turnAroundTime,
                         waitingTime, readyQueue, process, time, sum);
-                fcfs.firstComeFirstServe();             //execute FCFS algorithm
+                fcfs.getRunningProcess();             //execute FCFS algorithm
                 break;
             case "B":  //if answer = b or B, create an object of SJF class
 
                 SJF sjf = new SJF(processId, arrivalTime, burstTime, temp, completionTime, turnAroundTime, waitingTime,
                         readyQueue, process, time, sum);
-                sjf.getShortestJob();             //execute SJF algorithm
+                sjf.getRunningProcess();             //execute SJF algorithm
                 break;
             case "C": //if answer = c or C, create an object of Priority class
                 getPriority();//get Priority for each Process
    
                 Priority prio = new Priority(processId, arrivalTime, burstTime, temp, priority, completionTime,
                         turnAroundTime, waitingTime, readyQueue, process, time, sum);
-                prio.getPrio();  
+                prio.getRunningProcess();  
                 break;
             case "D": //if answer = d or D, create an object of EDF class
                 getDeadline(); //get Deadline for each Process
                 getPeriod();  //get Period for each Process
                 EDF edf = new EDF(processId, startingTime, burstTime, deadline, period, completionTime, turnAroundTime,waitingTime, temp,tempPeriod, count,
                     array, readyQueue,time,process,sum, lcm);
-                edf.getEDF(); //execute Deadline algorithm 
+                edf.getRunningProcess(); //execute Deadline algorithm 
                 System.out.println(process);
                 break;
             case "E": //if answer = e or E, create an object of MLQ class
@@ -116,7 +116,7 @@ public class Main {
                 System.out.println("[2] Shortest Job First (SJF)");
                 getProcessQueue(); //get Queue Number for each Process
                 MLQ mlq = new MLQ(processId, arrivalTime, burstTime, completionTime, turnAroundTime, waitingTime, flags, queuePriority, startTime ,check, process);
-                mlq.execute(); //execute Multi-level Queue algorithm
+                mlq.getRunningProcess(); //execute Multi-level Queue algorithm
                 break;
             case "F": //if answer = f pr F, answer will be "N"
             //loop will break

@@ -28,7 +28,7 @@ public class MLQ{
 	}
 
 
-	public void execute() {
+    void getRunningProcess(){
         while (true) {
             int c = numOfProcesses, min = 99999;
             if (checkProcessComplete == numOfProcesses)

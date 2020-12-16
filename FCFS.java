@@ -92,7 +92,7 @@ class FCFS{
 	        }
 	    }
 
-	 void firstComeFirstServe() 
+		void getRunningProcess(){
 	    {
 			//sort process by AT
 			sortArrivalTime();

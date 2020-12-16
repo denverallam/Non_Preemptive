@@ -40,7 +40,7 @@ class EDF{
     }
 
     //execute earlist deadline algorithm
-    void getEDF(){
+    void getRunningProcess(){
         //get how many times each process will execute
         getCounter();
         //execute until time is equal to LCM of Period

@@ -47,7 +47,7 @@ class Priority{
     }
     
     //execute Priority Algorithm
-     void getPrio(){
+    void getRunningProcess(){
         int completed=0;
         //will execute until all processes are completed
         for(int i = 0; i < process;i=completed){
