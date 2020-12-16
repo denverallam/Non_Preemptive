@@ -43,7 +43,7 @@ public class Main {
             displayChoices();
             //get user input
             getAlgorithm();
-
+            selectAlgorith();
             termination();
         }
         scan.close();
@@ -80,6 +80,10 @@ public class Main {
         }
 
         //check algorithm chosen by the user
+        System.out.println();
+    }
+
+    static void selectAlgorith(){
         switch (algorithm) {
             
             case "A": //if answer = a or A, create an object of FCFS class
@@ -122,11 +126,10 @@ public class Main {
                 answer = "N";
                 break;
         }
-        System.out.println();
     }
-
     //default option every after execution
     static void termination(){
+
         System.out.print("Input again (y/n)?: ");
         answer = scan.next().toUpperCase();
         //if answer = y, Y, n, or N, proceed
