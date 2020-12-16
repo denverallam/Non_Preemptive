@@ -27,6 +27,7 @@ class FCFS{
 		   this.sum = s;
    }    
 
+   	//sort process by arrival time using bubblesort algorithm
 	 void sortArrivalTime()
 	    {
 	        for (int i = 0; i < process; i++) 
@@ -52,12 +53,14 @@ class FCFS{
 	        }
 		}
 
+		//sort process by priority id using bubblesort algorithm
 		void sortPriorityId()
 	    {
 	        for (int i = 0; i < process; i++) 
 	        {
 	            for (int j = 0; j < process - i - 1; j++) 
 	            {
+					//if j index is greater than (j+1) index, do swap
 	                if (processId[j] > processId[j + 1]) 
 	                {
 	                    int temp = arrivalTime[j];
@@ -91,7 +94,10 @@ class FCFS{
 
 	 void firstComeFirstServe() 
 	    {
-	        sortArrivalTime();
+			//sort process by AT
+			sortArrivalTime();
+			
+			//compute for CT, TAT, & WT 
 	        completionTime[0] = arrivalTime[0] + burstTime[0];
 	        turnAroundTime[0] = completionTime[0] - arrivalTime[0];
 			waitingTime[0] = turnAroundTime[0] - burstTime[0];
@@ -102,13 +108,17 @@ class FCFS{
 					completionTime[i+1] = burstTime[i+1] + completionTime[i];
 				}
 				else{
+					//if arrival time of next process is less than CT of previous one, add idle time
 					idle = arrivalTime[i+1] - completionTime[i];
 					completionTime[i+1] += idle + completionTime[i] + burstTime[i+1];
 				}
 					turnAroundTime[i+1] = completionTime[i+1] - arrivalTime[i+1];
 					waitingTime[i+1] = turnAroundTime[i+1] - burstTime[i+1];
 			}
+			//sort the processes by priority id
 			sortPriorityId();
+
+			//display computed CT,TAT and WT
 			displayTable();
 		}
 

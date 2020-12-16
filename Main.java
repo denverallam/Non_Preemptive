@@ -32,18 +32,24 @@ public class Main {
 
     public static void main(final String args[]) {
         answer = "Y";
+        //while answer is Yes, execute the program
+        //else, terminate
         while (answer.equalsIgnoreCase("Y")) {
+            //Gather needed data from the user
             getNumberOfProcess();
             getArrivalTime();
             getBurstTime();
+            //Display Non-Preemptive Scheduling Algorithm
             displayChoices();
+            //get user input
             getAlgorithm();
+
             termination();
         }
         scan.close();
     }
 
-
+    //display Algorithm Choices
     static void displayChoices(){
         System.out.println("CPU Scheduling Algorithm:");
         System.out.println("[A] First Come First Serve (FCFS)");
@@ -53,55 +59,67 @@ public class Main {
         System.out.println("[E] Multilevel Queue (MLQ)");
         System.out.println("[F] Exit");
     }
+
+    //get user input
     static void getAlgorithm() {
         System.out.print("Enter Choice: ");
         algorithm = scan.next().toUpperCase();
+        //if user input is A-F, proceed with the program
         if(algorithm.equalsIgnoreCase("A") || algorithm.equalsIgnoreCase("B") || algorithm.equalsIgnoreCase("C") ||
         algorithm.equalsIgnoreCase("D") || algorithm.equalsIgnoreCase("E") || algorithm.equalsIgnoreCase("F")){
             if(algorithm.equalsIgnoreCase("F")){
+                //if user chooses F, the program will terminate
                 System.out.println("Terminating Program.........");
                 System.exit(0);
             }
+            //if answer is A-E, proceed with program
         }
+        //if user input is not A-F, the method will reiterate
         else{
             getAlgorithm();
         }
 
+        //check algorithm chosen by the user
         switch (algorithm) {
-            case "A":
+            
+
+            case "A": //if answer = a or A, create an object of FCFS class
                 FCFS fcfs = new FCFS(processId, arrivalTime, burstTime, temp, completionTime, turnAroundTime,
                         waitingTime, readyQueue, process, time, sum);
-                fcfs.firstComeFirstServe();
+                fcfs.firstComeFirstServe();             //execute FCFS algorithm
                 break;
-            case "B":
+            case "B":  //if answer = b or B, create an object of SJF class
+
                 SJF sjf = new SJF(processId, arrivalTime, burstTime, temp, completionTime, turnAroundTime, waitingTime,
                         readyQueue, process, time, sum);
-                sjf.getShortestJob();
+                sjf.getShortestJob();             //execute SJF algorithm
                 break;
-            case "C":
-                getPriority();
+            case "C": //if answer = c or C, create an object of Priority class
+                getPriority();//get Priority for each Process
+   
                 Priority prio = new Priority(processId, arrivalTime, burstTime, temp, priority, completionTime,
                         turnAroundTime, waitingTime, readyQueue, process, time, sum);
-                prio.getPrio();
+                prio.getPrio();  
                 break;
-            case "D":
-                getDeadline();
-                getPeriod();
+            case "D": //if answer = d or D, create an object of EDF class
+                getDeadline(); //get Deadline for each Process
+                getPeriod();  //get Period for each Process
                 EDF edf = new EDF(processId, startingTime, burstTime, deadline, period, completionTime, turnAroundTime,waitingTime, temp,tempPeriod, count,
                     array, readyQueue,time,process,sum, lcm);
-                edf.getEDF();
+                edf.getEDF(); //execute Deadline algorithm 
                 System.out.println(process);
                 break;
-            case "E":
-                System.out.println("MLQ");
+            case "E": //if answer = e or E, create an object of MLQ class
+                System.out.println("MLQ"); //display Queue Choices
                 System.out.println("Input Number of Queues:");
                 System.out.println("[1] First Come First Serve (FCFS)");
                 System.out.println("[2] Shortest Job First (SJF)");
-                getProcessQueue();
+                getProcessQueue(); //get Queue Number for each Process
                 MLQ mlq = new MLQ(processId, arrivalTime, burstTime, completionTime, turnAroundTime, waitingTime, flags, queuePriority, startTime ,check, process);
-                mlq.execute();
+                mlq.execute(); //execute Multi-level Queue algorithm
                 break;
-            case "F":
+            case "F": //if answer = f pr F, answer will be "N"
+            //loop will break
                 System.out.println("Exit");
                 answer = "N";
                 break;
@@ -109,16 +127,21 @@ public class Main {
         System.out.println();
     }
 
+    //default option every after execution
     static void termination(){
         System.out.print("Input again (y/n)?: ");
         answer = scan.next().toUpperCase();
+        //if answer = y, Y, n, or N, proceed
         if(answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("N")){
+            
             if(answer.equalsIgnoreCase("N")){
+                //if answer is n or N,terminate the program
                 System.out.println();
                 System.out.println("Terminating Program.........");
                 System.exit(0);
             }
         }
+        //if answer is not y,Y,n, or N, reiterate the method
         else{
             termination();
         }
@@ -129,7 +152,7 @@ public class Main {
     static void getNumberOfProcess(){
         System.out.print("Input number of processes [2-9]: ");
         boolean done = true;
-        while (done) {
+        while (done) {  //if input is invalid, ask for input again
             if (scan.hasNextInt()){
                 process = scan.nextInt();
                 if(process<2 || process>9){
@@ -143,7 +166,8 @@ public class Main {
                 continue;
             }
         }
-     
+        
+        //insantiate all needed variables
         processId= new int [process];
         arrivalTime= new int [process];
         burstTime= new int [process];
@@ -172,7 +196,7 @@ public class Main {
         for(int i = 0; i < process; i++){
             done = true;
             System.out.print("AT" + (i+1) + ": ");
-            while (done) {
+            while (done) { //if input is invalid, ask for input again
                 if (scan.hasNextInt()){
                     arrivalTime[i] = scan.nextInt();
                 }
@@ -191,7 +215,7 @@ public class Main {
     static void getBurstTime(){
         System.out.println("Input individual burst time:");
         boolean done = true;
-        for(int i = 0; i < process; i++){
+        for(int i = 0; i < process; i++){ //if input is invalid, ask for input again
             done = true;
             System.out.print("BT" + (i+1) + ": ");
             while (done) {
@@ -217,7 +241,7 @@ public class Main {
         for(int i = 0; i < process; i++){
             done = true;
             System.out.print("Deadline " + (i+1) + ": ");
-            while (done) {
+            while (done) { //if input is invalid, ask for input again
                 if (scan.hasNextInt()){
                     deadline[i] = scan.nextInt();
                     startingTime[i] = 0;
@@ -241,7 +265,7 @@ public class Main {
         for(int i = 0; i < process; i++){
             done = true;
             System.out.print("Period " + (i+1) + ": ");
-            while (done) {
+            while (done) { //if input is invalid, ask for input again
                 if (scan.hasNextInt()){
                     period[i] = scan.nextInt();
                 }
@@ -262,7 +286,7 @@ public class Main {
         System.out.println();
         System.out.println("Input individual priority number:");
         boolean done = true;
-        for(int i = 0; i < process; i++){
+        for(int i = 0; i < process; i++){ //if input is invalid, ask for input again
             done = true;
             System.out.print("PRIO " + (i+1) + ": ");
             while (done) {
@@ -283,10 +307,10 @@ public class Main {
 
     static void getProcessQueue(){
         //user input to assign the queue number for each processes
-        for(int i = 0; i < process; i++){
+        for(int i = 0; i < process; i++){ 
             boolean done = true;
             System.out.print("Enter Process " + (i + 1) + " Queue: ");
-            while (done) {
+            while (done) {//if input is invalid, ask for input again
                 if (scan.hasNextInt()){
                     queuePriority[i] = scan.nextInt();
                     if(queuePriority[i]<1 || queuePriority[i]>2){
