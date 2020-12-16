@@ -31,6 +31,7 @@ class SJF{
 
     //display content of table
     void displayTable(){
+        
         System.out.println();
         System.out.println("SJF");
         System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");

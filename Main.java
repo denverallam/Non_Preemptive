@@ -82,7 +82,6 @@ public class Main {
         //check algorithm chosen by the user
         switch (algorithm) {
             
-
             case "A": //if answer = a or A, create an object of FCFS class
                 FCFS fcfs = new FCFS(processId, arrivalTime, burstTime, temp, completionTime, turnAroundTime,
                         waitingTime, readyQueue, process, time, sum);

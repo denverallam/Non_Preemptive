@@ -47,7 +47,8 @@ class FCFS{
 						temp = processId[j];
 						processId[j] = processId[j + 1];
 	                    processId[j + 1] = temp;
-	                    
+						
+						
 	                }
 	            }
 	        }

@@ -36,8 +36,8 @@ class Priority{
         System.out.println("PID\tAT\tBT\tP\tCT\tTAT\tWT");
         System.out.println("--------------------------------------------------");
         for(int i = 0; i<process;i++){
-        System.out.println("P" + processId[i] + "\t" + arrivalTime[i] + "\t" + temp[i] + "\t" + prio[i] +"\t" + completionTime[i]
-        + "\t" + turnAroundTime[i] + "\t" + waitingTime[i]);
+            System.out.println("P" + processId[i] + "\t" + arrivalTime[i] + "\t" + temp[i] + "\t" + prio[i] +"\t" + completionTime[i]
+            + "\t" + turnAroundTime[i] + "\t" + waitingTime[i]);
         System.out.println("--------------------------------------------------");
         }	
 

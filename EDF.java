@@ -39,6 +39,7 @@ class EDF{
         this.lcm = l;
     }
 
+    
     //execute earlist deadline algorithm
     void getRunningProcess(){
         //get how many times each process will execute

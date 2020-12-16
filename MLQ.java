@@ -24,9 +24,11 @@ public class MLQ{
 		this.queuePriority = qp;
 		this.startingTime =st;
 		this.checkProcessComplete = check;
-		this.numOfProcesses = p;
+        this.numOfProcesses = p;
+        
 	}
 
+    
 
     void getRunningProcess(){
         while (true) {
