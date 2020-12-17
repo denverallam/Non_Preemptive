@@ -97,6 +97,21 @@ class EDF{
                 }
             }
         }
+
+        for(int i = 0; i<process-1; i++){
+            for(int j=0; j<process-i-1;j++){
+                //if j+1 index of ready queue is 999, ignore
+                //else, do this
+                if(!(readyQueue[j+1]==999)){
+                    //if starting of jth index of ready queue is greater than j+1 index, do swap
+                    if(startingTime[readyQueue[j]]>startingTime[readyQueue[j+1]]){
+                        int tmp = readyQueue[j];
+                        readyQueue[j] = readyQueue[j+1];
+                        readyQueue[j+1] = tmp;
+                    }
+                }
+                }
+        }
     }
 
       //sort ready queue by deadline using bubble sort
