@@ -1,4 +1,4 @@
-import java.util.Scanner;
+//Programmer: MORDENO, JON ANDREW
 
 public class MLQ{
 
@@ -53,7 +53,6 @@ public class MLQ{
                 }
             }
 
-
             if (c == numOfProcesses)
                 startingTime++; //this is for the idle time
             else {
@@ -85,7 +84,8 @@ public class MLQ{
         System.out.println("Average Turn-around Time:\t" + String.format("%.2f", computeAverage(turnAroundTime)) + " units");
         System.out.println("Average Waiting Time:\t\t" +String.format("%.2f", computeAverage(waitingTime))+ " units");
         System.out.println();  
-	}
+    }
+    
 	double computeAverage(int array[]){
         double sum = 0;
         for(int num: array){

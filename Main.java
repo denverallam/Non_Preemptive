@@ -1,4 +1,6 @@
 
+//PROGRAMMER: ALLAM, DENVER
+
 import java.util.Scanner;
 
 public class Main {
@@ -43,7 +45,7 @@ public class Main {
             displayChoices();
             //get user input
             getAlgorithm();
-            selectAlgorith();
+            selectAlgorithm();
             termination();
         }
         scan.close();
@@ -83,7 +85,7 @@ public class Main {
         System.out.println();
     }
 
-    static void selectAlgorith(){
+    static void selectAlgorithm(){
         switch (algorithm) {
             
             case "A": //if answer = a or A, create an object of FCFS class
@@ -210,7 +212,6 @@ public class Main {
             }
         } 
         System.out.println();
-
     }
 
     static void getBurstTime(){

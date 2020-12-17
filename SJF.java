@@ -1,4 +1,4 @@
-
+//PROGRAMMER: PESTIN, JOYCE ANN
 
 class SJF{
      int [] processId;
@@ -99,6 +99,7 @@ class SJF{
             }
         }
     }
+
     //sort ready queue by bubble sort using bubble sort 
     void sortBurstTime(){
 

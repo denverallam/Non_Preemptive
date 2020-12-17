@@ -1,4 +1,4 @@
-
+//PROGRAMMER: TRAZO, GERVACIO
 class Priority{
     int [] processId;
     int [] arrivalTime;

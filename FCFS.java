@@ -1,3 +1,4 @@
+//PROGRAMMER: TOLENTINO, ARAH NICOLLE
 
 class FCFS{
 
@@ -55,7 +56,7 @@ class FCFS{
 		}
 
 		//sort process by priority id using bubblesort algorithm
-		void sortPriorityId()
+		void sortProcessId()
 	    {
 	        for (int i = 0; i < process; i++) 
 	        {
@@ -117,7 +118,7 @@ class FCFS{
 					waitingTime[i+1] = turnAroundTime[i+1] - burstTime[i+1];
 			}
 			//sort the processes by priority id
-			sortPriorityId();
+			sortProcessId();
 
 			//display computed CT,TAT and WT
 			displayTable();

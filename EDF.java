@@ -1,4 +1,4 @@
-
+//PROGRAMMER: ALLAM, DENVER
 class EDF{
     int [] processId;
     int [] burstTime;
@@ -128,18 +128,17 @@ class EDF{
                         readyQueue[j+1] = tmp;
                     }
                 }
-                }
+            }
         }
     }
 
-    //once BT of a process = 0, the process will be completed
-    //time when BT becomes 0 will be the CT of the process
     void computeCompletionTime(){
         time+=burstTime[readyQueue[0]];
         completionTime[readyQueue[0]] = time;
         turnAroundTime[readyQueue[0]] = completionTime[readyQueue[0]];
         waitingTime[readyQueue[0]] = turnAroundTime[readyQueue[0]] - burstTime[readyQueue[0]];
-}
+    }
+
     //compute avereage of TAT or WT
     double computeAverage(int array[]){
         sum = 0;
@@ -162,11 +161,9 @@ class EDF{
     int findLcm(int[] array) 
     { 
         int divisor = 2; 
-        
         while (true) { 
             int counter = 0; 
             boolean divisible = false; 
-            
             for (int i = 0; i < array.length; i++) { 
                 if (array[i] == 0) { 
                     return 0; 
